@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: mart_attribution_linear
+    columns:
+      - name: candidate_id
+        tests:
+          - not_null
+      - name: source
+        tests:
+          - not_null
+      - name: credit
+        tests:
+          - not_null
