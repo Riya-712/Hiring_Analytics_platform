@@ -4,22 +4,6 @@ An end-to-end recruitment analytics project built to help HR and talent acquisit
 
 The project demonstrates a complete analytics workflow: **Python data preparation → PostgreSQL → dbt transformations → Power BI dashboards**. It uses synthetic recruitment data for portfolio and learning purposes.
 
-## Table of Contents
-
-- [Business Problem](#business-problem)
-- [Objectives](#objectives)
-- [Technology Stack](#technology-stack)
-- [Architecture](#architecture)
-- [Key Features](#key-features)
-- [KPIs and Business Metrics](#kpis-and-business-metrics)
-- [Multi-Touch Attribution](#multi-touch-attribution)
-- [Power BI Dashboards](#power-bi-dashboards)
-- [Data and Assumptions](#data-and-assumptions)
-- [Getting Started](#getting-started)
-- [Running dbt](#running-dbt)
-- [Project Structure](#project-structure)
-- [Limitations and Future Enhancements](#limitations-and-future-enhancements)
-
 ## Business Problem
 
 Recruitment teams need to understand more than the number of candidates hired. They need to know where candidates leave the hiring process, which sourcing channels contribute to hires, how much those channels cost, and how long recruitment takes.
@@ -131,8 +115,6 @@ The reports bring together KPI cards, funnel and drop-off visuals, monthly trend
 | Cost per Attributed Hire | Source spend ÷ attributed hires |
 | Attributed Hires | Sum of source-level attribution credits under a selected model |
 
-**Metric definitions matter.** For example, an offer acceptance rate should be calculated as accepted offers divided by offers—not as the hired segment's percentage of a donut chart containing both offered and hired counts. Similarly, cost-per-hire results depend on how source spend and hires are attributed.
-
 ## Multi-Touch Attribution
 
 Example journey:
@@ -141,19 +123,6 @@ Example journey:
 LinkedIn -> Career Site -> Referral -> Hired
 ```
 
-Illustrative linear credit for three recorded touchpoints:
-
-| Source | Linear credit |
-|---|---:|
-| LinkedIn | 0.333 |
-| Career Site | 0.333 |
-| Referral | 0.333 |
-| **Total** | **1.000** |
-
-This example illustrates the method; it is not a measured result from the dataset.
-
-Attribution is a rule for distributing credit, not proof that a channel caused a hire. The model is useful for comparing sourcing journeys, but it should be interpreted alongside spend, conversion, and hiring outcomes.
-
 ## Power BI Dashboards
 
 The report is designed to support analysis across the following areas:
@@ -161,135 +130,6 @@ The report is designed to support analysis across the following areas:
 - **Recruitment Funnel:** candidate counts and progression across stages.
 - **Sourcing ROI & Attribution:** source costs, cost per hire or attributed hire, and first-touch vs. last-touch vs. linear attribution.
 - **Hiring Time Analysis:** average and median time-to-hire, monthly hiring trends, source comparisons, and target-versus-actual hiring time.
-
-Add screenshots of your completed report to this README when available. For example, create a `screenshots/` folder and place exported dashboard images in it, then embed them with Markdown:
-
-```markdown
-![Recruitment Funnel Dashboard](screenshots/recruitment-funnel.png)
-![Sourcing ROI Dashboard](screenshots/source-roi.png)
-![Hiring Time Analysis](screenshots/hiring-time-analysis.png)
-```
-
-Only keep image links for screenshots that you have actually added to the repository.
-
-## Data and Assumptions
-
-- The project uses **synthetic data** for portfolio demonstration; results should not be treated as real-world recruitment benchmarks.
-- Candidate, event, touchpoint, and source-cost data serve different analytical purposes and should be joined using appropriate keys.
-- Missing hire dates are expected for candidates who were not hired.
-- Funnel counts, conversion rates, and attribution results depend on consistent stage definitions and deduplication rules.
-- Source costs must match the time period and level of granularity used by the ROI calculation. If costs are monthly but hires span multiple periods, the cost model should be interpreted accordingly.
-
-## Getting Started
-
-### Prerequisites
-
-Install or configure:
-
-- Python 3
-- PostgreSQL
-- dbt Core with the PostgreSQL adapter
-- Power BI Desktop
-- Git (optional, for cloning the repository)
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/Riya-712/Hiring_Analytics_platform.git
-cd Hiring_Analytics_platform
-```
-
-### 2. Set up Python
-
-Create and activate a virtual environment:
-
-**Windows PowerShell**
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-```
-
-Install the packages listed in the project's dependency file, if one is provided:
-
-```bash
-pip install -r requirements.txt
-```
-
-If the repository does not contain a `requirements.txt`, install the packages required by the data-generation and cleaning scripts, such as pandas, in your environment.
-
-### 3. Prepare the data
-
-Run the project's data-generation and/or cleaning scripts as appropriate for the files included in the repository. Confirm that the expected CSV files have been created and inspect their column names, row counts, date fields, keys, and null values before loading them.
-
-### 4. Load data into PostgreSQL
-
-Create or select the PostgreSQL database configured in your dbt profile. Load the cleaned CSV files into the raw tables expected by the dbt source definitions and models. The table names and column names must match the project's SQL models.
-
-Do not commit database passwords or other credentials. Keep local connection details in your dbt profile or environment configuration, and ensure secrets are excluded from version control.
-
-### 5. Configure dbt
-
-From the directory containing `dbt_project.yml`, configure the PostgreSQL connection in your local `profiles.yml` and verify the connection:
-
-```bash
-dbt debug
-```
-
-The dbt profile name and target must match the settings in `dbt_project.yml`.
-
-## Running dbt
-
-Run these commands from the **dbt project directory**—the directory containing `dbt_project.yml`.
-
-Check project configuration:
-
-```bash
-dbt debug
-```
-
-Inspect available models and resources:
-
-```bash
-dbt ls
-```
-
-Load configured seed CSV files, such as source-cost reference data:
-
-```bash
-dbt seed
-```
-
-Build the models:
-
-```bash
-dbt run
-```
-
-Run data-quality tests:
-
-```bash
-dbt test
-```
-
-For a combined build and test workflow, where supported by your installed dbt version:
-
-```bash
-dbt build
-```
-
-If a model is not found, check its SQL filename, whether the model is enabled, the configured model paths, and whether the command is being run from the correct directory. If a relation does not exist, check that its upstream source tables and dbt dependencies have been created successfully.
-
-## Connect Power BI
-
-1. Open Power BI Desktop.
-2. Select **Get data → PostgreSQL database**.
-3. Enter your PostgreSQL server and database.
-4. Connect to the required dbt models or marts.
-5. Verify data types and relationships.
-6. Create or validate DAX measures against the SQL definitions.
-7. Add slicers and visuals, and test whether filters produce consistent KPI values.
-
-Prefer business-ready marts for reporting rather than duplicating complex business logic independently in multiple visuals.
 
 ## Project Structure
 
@@ -320,12 +160,6 @@ This is a conceptual guide, not a guarantee that every listed directory or file 
 - Implement and validate a controlled A/B testing module before reporting experimental results.
 - Add documentation and screenshots for each Power BI report page.
 
-## Author
-
-**Riya Raut**
-
-- GitHub: [Riya-712](https://github.com/Riya-712)
-- Project repository: [Hiring Analytics Platform](https://github.com/Riya-712/Hiring_Analytics_platform)
 
 ---
 
