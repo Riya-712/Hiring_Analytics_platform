@@ -127,9 +127,13 @@ LinkedIn -> Career Site -> Referral -> Hired
 
 The report is designed to support analysis across the following areas:
 
-- **Recruitment Funnel:** candidate counts and progression across stages.
-- **Sourcing ROI & Attribution:** source costs, cost per hire or attributed hire, and first-touch vs. last-touch vs. linear attribution.
-- **Hiring Time Analysis:** average and median time-to-hire, monthly hiring trends, source comparisons, and target-versus-actual hiring time.
+- ![**Recruitment Funnel:** candidate counts and progression across stages](dashboard/Overview.png)
+
+  
+- ![**Sourcing ROI & Attribution:** source costs, cost per hire or attributed hire, and first-touch vs. last-touch vs. linear attribution](dashboard/source_roi.png)
+
+  
+- ![**Hiring Time Analysis:** average and median time-to-hire, monthly hiring trends, source comparisons, and target-versus-actual hiring time](dashboard/time_analysis.png)
 
 ## Project Structure
 
